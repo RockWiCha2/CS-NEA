@@ -10,7 +10,7 @@ let canvasCenter = canvasWidth / 2
 let homeBgColour = "#02042e" //home background colour
 let gamePageBgColour = "#474747" //game page background colour
 let gameScreenBgColour = "#010217" //game screen background colour
-let goScreenBgColour = "8c1900" // game over screen background colour
+let goScreenBgColour = "#8c1900" // game over screen background colour
 
 let currentPage//Current Page that is being displayed to the user
 
@@ -97,11 +97,9 @@ function setup() {
 
   player = new player(playerImage, gameScreenX, gameScreenRX) //Creates a new player object
   //bullet = new bullet(bulletImage, 200, 500, 10) //Creates a new bullet object
+  //spawnAlienGrid(getRandomInt(1, 3), getRandomInt(3, 8))
 
-  //alien = new Alien(200, 100, gameScreenX, gameScreenRX, alienImage)
-  spawnAlienGrid(getRandomInt(1, 3), getRandomInt(3, 8))
-
-  console.count("gsx: " + gameScreenX)
+  console.log("gsx: " + gameScreenX)
 }
 
 function draw() {
@@ -259,15 +257,41 @@ function drawGamePage() { //function that contains the game page
     }
   }
 
+
+  //Checks if the health is below or = to 0
+
+  if (health <= 0) {
+    currentPage = "gameover"
+  }
 }
 
 function drawGameOverPage() { //function that draws the game over page
+  cursor()
   background(goScreenBgColour)
 
   fill(255)
   textFont(gameTitleFont)
-  textSize(150)
-  text("GAME OVER", (canvasWidth / 2) - (textWidth(gameName) / 2), 200)
+  textSize(250)
+  text("GAME OVER", (canvasWidth / 2) - (textWidth("GAME OVER") / 2), 200)
+  
+  //Button Rect
+  rect(startBtnX, startBtnY, startBtnWidth, startBtnHeight, startBtnCir)
+  
+  //ButtonTextAttributes
+  textSize(30)
+  textFont(btnFont) 
+  fill(0)
+  text("Click to Restart", startBtnX + (startBtnWidth / 2) - (textWidth("Click to Restart") / 2), 535, startBtnWidth - 20) 
+  //Creates the text "Click to restart" in the middle of the button
+
+  //Refreshes the page, letting the user restart the game.
+  if(mouseX >= startBtnX 
+    && mouseX <= startBtnX + startBtnWidth 
+    && mouseY >= startBtnY 
+    && mouseY <= startBtnY + startBtnHeight 
+    && mouseIsPressed == true) { 
+   refreshPage()
+ }
 }
 
 function spawnAlienGrid(rows, cols) {
@@ -352,4 +376,8 @@ function getRandomInt(min, max) {
 
 function setPage(page) {
   currentPage = page //Sets the current page to the specified page
+}
+
+function refreshPage() {
+  location.reload(); // Reloads the current page
 }
