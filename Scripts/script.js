@@ -237,12 +237,19 @@ function drawGamePage() { //function that contains the game page
   }
   
   for (let i = 0; i < aliens.length; i++) { //Loops through the aliens array
+    //console.log("Alien no:Y   -  ", i, " : ", aliens[i].getY())
+    if ((aliens[i].getY() + aliens[i].getHeight()) > gameScreenBY) { //Checks if the alien touches the bottom of the game screen
+      health -= aliens[i].getDamage() //Subtracts the value of the damage attribute to the health variable
+      aliens.splice(i, 1) //Removes the alien from the array
+      break; //Breaks out of the for loop
+    }
     if (aliens[i].getHealth() <= 0) {
       aliens.splice(i, 1) //Removes the alien from the array
       score += 1 //Increases the score by 1
       alienDeathSFX.play() //Plays the alien death sound effect
+      break; //Breaks out of the for loop
     } else {
-      aliens[i].update()
+      aliens[i].update() //Updates the attributes of the alien
     }
   }
 

@@ -61,6 +61,6 @@ class Alien {
   }
 
   getDamage() {
-    returnthis.damage
+    return this.damage
   }
 }
