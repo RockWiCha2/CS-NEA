@@ -93,7 +93,7 @@ function preload() {
 //The initial setup of the program
 function setup() {
   createCanvas(canvasWidth, canvasHeight) //Creates the canvas with the specified width and height
-  currentPage = "gameover" //Sets the page to home
+  currentPage = "home" //Sets the page to home
 
   player = new player(playerImage, gameScreenX, gameScreenRX) //Creates a new player object
   //bullet = new bullet(bulletImage, 200, 500, 10) //Creates a new bullet object
