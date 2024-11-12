@@ -10,6 +10,7 @@ let canvasCenter = canvasWidth / 2
 let homeBgColour = "#02042e" //home background colour
 let gamePageBgColour = "#474747" //game page background colour
 let gameScreenBgColour = "#010217" //game screen background colour
+let goScreenBgColour = "8c1900" // game over screen background colour
 
 let currentPage//Current Page that is being displayed to the user
 
@@ -92,7 +93,7 @@ function preload() {
 //The initial setup of the program
 function setup() {
   createCanvas(canvasWidth, canvasHeight) //Creates the canvas with the specified width and height
-  currentPage = "home" //Sets the page to home
+  currentPage = "gameover" //Sets the page to home
 
   player = new player(playerImage, gameScreenX, gameScreenRX) //Creates a new player object
   //bullet = new bullet(bulletImage, 200, 500, 10) //Creates a new bullet object
@@ -115,6 +116,11 @@ function draw() {
     //Gameplay page
     case "game":
       drawGamePage() //Calls draw game page function
+    break;
+
+    //Game Over Page
+    case "gameover":
+      drawGameOverPage()
     break;
   }
 }
@@ -255,7 +261,14 @@ function drawGamePage() { //function that contains the game page
 
 }
 
+function drawGameOverPage() { //function that draws the game over page
+  background(goScreenBgColour)
 
+  fill(255)
+  textFont(gameTitleFont)
+  textSize(150)
+  text("GAME OVER", (canvasWidth / 2) - (textWidth(gameName) / 2), 200)
+}
 
 function spawnAlienGrid(rows, cols) {
   
